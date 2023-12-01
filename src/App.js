@@ -95,6 +95,19 @@ function App() {
 
    let remainCount = todos.filter(t => !t.complete).length
 
+    let clearComplete = () => {
+
+        todos.forEach(t => {
+            if(t.complete){
+                deleteTodo(t.id)
+            }
+        })
+
+       setTodos(prevState => {
+           return prevState.filter((t => !t.complete))
+       })
+    }
+
 
   return (
     <div className="todo-app-container">
@@ -106,7 +119,7 @@ function App() {
        <CheckallAndRemaining remainCount={remainCount} chechAll={chechAll}/>
         <div className="other-buttons-container">
          <FilterBtn/>
-         <ClearBtn/>
+         <ClearBtn clearComplete={clearComplete}/>
 
         </div>
       </div>
