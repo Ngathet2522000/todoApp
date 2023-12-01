@@ -78,6 +78,22 @@ function App() {
        })
    }
 
+   let chechAll = () => {
+
+       todos.forEach(t => {
+           t.complete = true
+           updateTodo(t)
+       })
+
+
+       setTodos(prevState => {
+           return prevState.map(t => {
+               return {...t, complete : true}
+           })
+       })
+   }
+
+   let remainCount = todos.filter(t => !t.complete).length
 
 
   return (
@@ -87,7 +103,7 @@ function App() {
 
        <TodoForm addTodo={addTodo}/>
         <TodoList todos = {todos} deleteTodo={deleteTodo} updateTodo={updateTodo}/>
-       <CheckallAndRemaining/>
+       <CheckallAndRemaining remainCount={remainCount} chechAll={chechAll}/>
         <div className="other-buttons-container">
          <FilterBtn/>
          <ClearBtn/>

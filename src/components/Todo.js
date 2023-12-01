@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-export default function Todo({todo , deleteTodo,updateTodo}) {
+export default function Todo({todo , deleteTodo, updateTodo }) {
 
     const [isEdit, setIsEdit] = useState(false)
     const [title, setTitle] = useState(todo.title) 
@@ -20,11 +20,11 @@ export default function Todo({todo , deleteTodo,updateTodo}) {
         <li className="todo-item-container">
             <div className="todo-item">
                 <input type="checkbox" />
-                {!isEdit &&
-                    <span onDoubleClick={()=> setIsEdit(true)} className={`todo-item-label ${todo.complete} ? 'line-through' : "" `}>
+                { !isEdit &&
+                    <span onDoubleClick={()=> setIsEdit(true)} className={`todo-item-label ${todo.complete} ? 'line-through' : '' `}>
                 {todo.title}
-                </span>}
-                {isEdit &&
+                </span> }
+                { isEdit &&
                     <form onSubmit={updatetodoHandler}>
                         <input type="text" className="todo-item-input" value={title} onChange={(e) => setTitle(e.target.value)} />
                     </form>
