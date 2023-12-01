@@ -47,11 +47,33 @@ function App() {
            method : "DELETE"
        })
 
-
        // update data at Client side
        setTodos(prevState => {
            return prevState.filter(todo  => {
                return todo.id !== todoID
+           })
+       })
+   }
+
+   let updateTodo = (todo) => {
+
+       // update data at Server side
+
+       fetch(`http://localhost:3001/todos/${todo.id}`,{
+           method : "PATCH",
+           headers: {
+               "Content-Type": "application/json",
+           },
+           body: JSON.stringify(todo),
+       });
+
+       // update data at Client side
+
+       setTodos(prevState => {
+           return prevState.map(t  => {
+               if(t.id === todo.id){
+                   return todo
+               }return t
            })
        })
    }
@@ -64,7 +86,7 @@ function App() {
         <h2>Todo App</h2>
 
        <TodoForm addTodo={addTodo}/>
-        <TodoList todos = {todos} deleteTodo={deleteTodo}/>
+        <TodoList todos = {todos} deleteTodo={deleteTodo} updateTodo={updateTodo}/>
        <CheckallAndRemaining/>
         <div className="other-buttons-container">
          <FilterBtn/>
